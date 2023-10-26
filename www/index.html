@@ -161,7 +161,7 @@
         $('#btnA').prop('disabled', false);
         $('#btnB').prop('disabled', false);
         $('#btnC').prop('disabled', false);
-        
+        $('#btnD').prop('disabled', false);
     }
 
     // Alarmの処理
@@ -201,6 +201,25 @@
         $("#remain").html("残り時間： "+period);
     }
     
+    function btnDClick(e){
+            alarm();
+           parseInt($("#second").val())-=10;
+            
+        
+    }
+
+    function btnEClick(e){
+            $("#minute").val()+=10;
+
+    }
+
+    function btnFClick(e){
+        alarm();
+        active=false;
+        period=60*parseInt($("#minute").val())+parseInt($("#second").val());
+        $("#time").html("経過時間： 0");
+        $("#remain").html("残り時間： "+period);
+    }
  
     // 繰り返し実行する処理
     function timer(){  
@@ -210,10 +229,28 @@
          $("#time").html("経過時間："+time);
          $("#remain").html("残り時間："+rest);
          analog(rest);
-         if(rest<=0){
+
+         
+         
+
+         if(rest==0){
            active=false;
            alarm();
+           document.body.style.backgroundColor="black";
+         }else if(rest==10){
+                alarm();
+                document.body.style.backgroundColor="orange";
+         }else if(rest==30){
+             alarm();
+                document.body.style.backgroundColor="yellow";
+         }else if(rest==50){
+             alarm();
+                document.body.style.backgroundColor="white";
+         }else if(rest==60){
+             alarm();
+                document.body.style.backgroundColor="blue";
          }
+
        }
        
         
@@ -231,7 +268,9 @@
     <div id="time">Time</div>
     <button id="btnA">Start</button>  
     <button id="btnB">Stop</button>  
-    <button id="btnC">Set</button>  
+    <button id="btnC">Set</button> 
+  
+    
     <input type="number" id="minute" value=0 >
     <input type="number" id="second" value=15 >
 </body>
